@@ -1,19 +1,23 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-app>
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title>
+        Tab 1
+      </ion-title>
     </ion-toolbar>
   </ion-header>
-  
-  <ion-button id="select-time">Select time</ion-button>
-  <ion-picker trigger="select-time" [columns]="pickerColumns"[buttons]="pickerButtons"></ion-picker>
 
-</ion-content>
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Tab 1</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </ion-content>
+
+  <ion-icon name="ellipse-outline"></ion-icon>
+
+  <ion-button id="set-timer">Set timer</ion-button>
+  <ion-picker trigger="set-timer" [columns]="pickerColumns" [buttons]="pickerButtons"></ion-picker>
+
+</ion-app>
