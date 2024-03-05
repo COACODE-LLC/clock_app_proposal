@@ -15,8 +15,8 @@
     </ion-header>
   </ion-content>
 
-  <ion-icon name="ellipse-outline"></ion-icon>
-
+  <ion-progress-bar [value]="timer$ | async" [buffer]="buffer_"></ion-progress-bar>
+  
   <ion-button id="set-timer">Set timer</ion-button>
   <ion-picker trigger="set-timer" [columns]="pickerColumns" [buttons]="pickerButtons"></ion-picker>
 

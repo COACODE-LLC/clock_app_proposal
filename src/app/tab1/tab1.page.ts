@@ -1,11 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { timer, map, Subject } from 'rxjs';
+import { takeUntil, takeWhile, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit, OnDestroy {
+  private stop$ = new Subject<void>;
+  private value_: number = 0;
+  public buffer_: number = this.value_;
+  public timeLeft = 0;
+
+  timer$ = timer(0, 1000).pipe(
+    takeUntil(this.stop$),
+    takeWhile(() => this.value_ < 1),
+    finalize(() => this.finish()),
+    map(() => {
+      this.value_ += 0.075;
+      return this.value_;
+    })
+  );
+
+  public pickerButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+    },
+    {
+      text: 'Confirm',
+      handler: (value: any) => {
+        console.log('Time in seconds: ', this.timeLeft)        
+        this.timeLeft = value.hours.value * 3600 + value.minutes.value * 60 + value.seconds.value;
+        
+      },
+    },
+  ];
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.stop$.next();
+  }
+
+  finish(): void {
+    console.log('Timer is finished!');
+  }
+
   public pickerColumns = [
     {
       name: 'hours',
@@ -127,20 +172,5 @@ export class Tab1Page {
       ],
     },
   ];
-
-  public pickerButtons = [
-    {
-      text: 'Cancel',
-      role: 'cancel',
-    },
-    {
-      text: 'Confirm',
-      handler: (value: any) => {
-        console.log('Selected:', value.hours.text, 'h', value.minutes.text, 'm', value.seconds.text, 's');
-      },
-    },
-  ];
-
-  constructor() { }
-
+  
 }
