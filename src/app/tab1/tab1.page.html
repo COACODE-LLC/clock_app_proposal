@@ -13,9 +13,29 @@
         <ion-title size="large">Tab 1</ion-title>
       </ion-toolbar>
     </ion-header>
-    <p *ngIf="timeLeft > 0">{{ timeLeft }} Seconds Left</p>
+
+    <div *ngIf="timeLeft > 0">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ timeLeft }}</ion-card-title>
+          <ion-card-subtitle>Hours</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ timeLeft }}</ion-card-title>
+          <ion-card-subtitle>Minutes</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ timeLeft }}</ion-card-title>
+          <ion-card-subtitle>Seconds</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </div>
   </ion-content>
-  
+
   <ion-button id="set-timer" expand="block" [disabled]="isRunning">Set timer</ion-button>
   <ion-picker trigger="set-timer" [columns]="pickerColumns" [buttons]="pickerButtons"></ion-picker>
 
