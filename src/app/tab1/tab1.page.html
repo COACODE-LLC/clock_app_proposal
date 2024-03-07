@@ -16,7 +16,7 @@
     <p *ngIf="timeLeft > 0">{{ timeLeft }} Seconds Left</p>
   </ion-content>
   
-  <ion-button id="set-timer">Set timer</ion-button>
+  <ion-button id="set-timer" expand="block" [disabled]="isRunning">Set timer</ion-button>
   <ion-picker trigger="set-timer" [columns]="pickerColumns" [buttons]="pickerButtons"></ion-picker>
 
 </ion-app>
