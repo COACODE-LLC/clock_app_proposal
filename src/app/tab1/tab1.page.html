@@ -14,25 +14,31 @@
       </ion-toolbar>
     </ion-header>
 
-    <div *ngIf="timeLeft > 0">
+    <div>
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{ timeLeft }}</ion-card-title>
+          <ion-card-title>{{ hours }}</ion-card-title>
           <ion-card-subtitle>Hours</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{ timeLeft }}</ion-card-title>
+          <ion-card-title>{{ minutes }}</ion-card-title>
           <ion-card-subtitle>Minutes</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{ timeLeft }}</ion-card-title>
+          <ion-card-title>{{ seconds }}</ion-card-title>
           <ion-card-subtitle>Seconds</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-button (click)="startTimer()" [disabled]="!isRunning">Start</ion-button>
+          <ion-button (click)="cancelTimer()" [disabled]="!isRunning">Cancel</ion-button>
+        </ion-row>
+      </ion-grid>
     </div>
   </ion-content>
 
