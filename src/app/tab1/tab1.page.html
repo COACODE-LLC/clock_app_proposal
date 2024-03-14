@@ -1,17 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-app>
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title>
+        Timer
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-</ion-content>
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Tab 1</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ hours }}</ion-card-title>
+          <ion-card-subtitle>Hours</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ minutes }}</ion-card-title>
+          <ion-card-subtitle>Minutes</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ seconds }}</ion-card-title>
+          <ion-card-subtitle>Seconds</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-button (click)="startTimer()" [disabled]="!isRunning">Start</ion-button>
+          <ion-button (click)="cancelTimer()" [disabled]="!isRunning">Cancel</ion-button>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+
+  <ion-button id="set-timer" expand="block" [disabled]="isRunning">Set timer</ion-button>
+  <ion-picker trigger="set-timer" [columns]="pickerColumns" [buttons]="pickerButtons"></ion-picker>
+
+</ion-app>
