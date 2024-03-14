@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { interval, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab1',
@@ -8,18 +6,17 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  private stop$ = new Subject<void>();
   isRunning = false;
   timeLeft = 0;
   hours = 0;
   minutes = 0;
   seconds = 0;
-  interval$ = interval(1000);
+  timerInterval: any;
 
   constructor() { }
 
   startTimer(): void {
-    this.interval$.pipe(takeUntil(this.stop$)).subscribe(() => {
+    this.timerInterval = setInterval(() => {
       if (this.timeLeft > 0) {
         console.log('tick')
         this.timeLeft--;
@@ -27,11 +24,12 @@ export class Tab1Page {
         this.minutes = Math.floor(this.timeLeft % 3600 / 60);
         this.seconds = Math.floor(this.timeLeft % 60);
       } else {
-        console.log('tock')
+        console.log('tock');
         this.finish();
       }
-    });
+    }, 1000);
   }
+
 
   cancelTimer(): void {
     this.timeLeft = 0;
@@ -43,9 +41,8 @@ export class Tab1Page {
 
   finish(): void {
     this.isRunning = false;
+    clearInterval(this.timerInterval);
     console.log('Timer is finished!');
-    this.stop$.next();    
-    this.stop$.complete();
   }
 
   populateColumnOptions(count: number) {
@@ -68,7 +65,7 @@ export class Tab1Page {
         this.hours = Math.floor(this.timeLeft / 3600);
         this.minutes = Math.floor(this.timeLeft % 3600 / 60);
         this.seconds = Math.floor(this.timeLeft % 60);
-        this.isRunning = true;       
+        this.isRunning = true;
       },
     },
   ];
@@ -86,5 +83,5 @@ export class Tab1Page {
       name: 'seconds',
       options: this.populateColumnOptions(60),
     }
-  ]
+  ];
 }
